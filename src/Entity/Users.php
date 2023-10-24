@@ -76,4 +76,5 @@ class Users
         $this->user_type = $user_type;
         return $this;
     }
+
 }

@@ -19,9 +19,6 @@ class Students
     #[ORM\OneToOne(cascade: ['persist', 'remove'])]
     private ?users $user_id = null;
 
-    #[ORM\Column]
-    private ?int $university_id = null;
-
     #[ORM\Column(length: 255)]
     private ?string $email = null;
 
@@ -58,6 +55,11 @@ class Students
     #[ORM\Column(nullable: true)]
     private ?bool $is_active = null;
 
+    #[ORM\ManyToOne]
+    #[ORM\JoinColumn(nullable: false)]
+
+    private ?universities $university_id = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -71,18 +73,6 @@ class Students
     public function setUserId(?users $user_id): static
     {
         $this->user_id = $user_id;
-
-        return $this;
-    }
-
-    public function getUniversityId(): ?int
-    {
-        return $this->university_id;
-    }
-
-    public function setUniversityId(int $university_id): static
-    {
-        $this->university_id = $university_id;
 
         return $this;
     }
@@ -227,6 +217,18 @@ class Students
     public function setIsActive(?bool $is_active): static
     {
         $this->is_active = $is_active;
+
+        return $this;
+    }
+
+    public function getUniversityId(): ?universities
+    {
+        return $this->university_id;
+    }
+
+    public function setUniversityId(?universities $university_id): static
+    {
+        $this->university_id = $university_id;
 
         return $this;
     }
